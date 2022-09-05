@@ -33,7 +33,7 @@ const inputOrder = document.getElementById("select-order");
 
 inputOrder.addEventListener("input", (e) => {
   let orderOptionValue = e.target.value;
-  let sortedByOrder = sortingFilms(orderOptionValue, films);
+  let sortedByOrder = sortingFilms(films, orderOptionValue);
   postersContainer.innerHTML = sortedByOrder
     .map(function (x) {
       return `
@@ -64,7 +64,7 @@ date.addEventListener("input", (e) => {
     postersContainer.innerHTML = `
     <div class= "noFoundMessage"> 
       <h2>Oops! =( try another one</h2>
-      <img class= "noFound-image" src="/src/images/totoroNotFoundMsg.gif" alt="no-found" srcset="">
+      <img class= "noFound-image" src="images\totoro.gif" alt="no-found">
     </div>`;
   } else {
     postersContainer.innerHTML = filteredByDate
