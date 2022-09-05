@@ -8,44 +8,27 @@ import {
   sortingFilms,
   films,
 } from "./data.js";
-/*importando funcion de imprimir imagenes, release date y score */
+
 const postersContainer = document.querySelector(".posters");
-
-
-const date = document.getElementById("dates");
-/*guardando input donde el usuario buscara la fecha de estreno */
-
+/*SPANS */
 const datesValues = document.getElementById("rangeValue");
 /*guardando etiqueda span de release date, que permite mostrar el valor al que el usuario cambia
 segun el valor que reciba...  */
+const scoreValues = document.getElementById("rangeScore");
 //console.log(date.value);
 
+/* INPUTS */
+const date = document.getElementById("dates");
+
+/*guardando input donde el usuario buscara la fecha de estreno */
 const directorsInput = document.getElementById("select-directors");
 
 const producersInput = document.getElementById("select-producers");
 
 const score = document.getElementById("movieScore");
 /* guardando input de puntajes */
-const scoreValues = document.getElementById("rangeScore");
-/* guardando etiqueta span de el puntaje */
 
 const inputOrder = document.getElementById("select-order");
-
-inputOrder.addEventListener("input", (e) => {
-  let orderOptionValue = e.target.value;
-  let sortedByOrder = sortingFilms(films, orderOptionValue);
-  postersContainer.innerHTML = sortedByOrder
-    .map(function (x) {
-      return `
-    <div class="poster">
-    <h2> ${x.title} </h2>
-    <h3> ${x.release_date} </h3>
-      <img class= "movie-image" src="${x.poster}" alt="poster" srcset="">
-    </div>
-    `;
-    })
-    .join("");
-});
 
 /* release date function */
 /*agregando un event listener a el input de fecha de estreno*/
@@ -54,7 +37,7 @@ date.addEventListener("input", (e) => {
   let releaseValue = e.target.value;
   /* aqui, estamos haciendo que el valor que esta dentro de etiqueta span, cambie, segun el valor que reciba el input*/
   datesValues.innerHTML = releaseValue;
-  /* pasando parametro del input, a la función de filterData de data.js */
+  /* pasando parametro del input, a la función de filterDate de data.js */
   let filteredByDate = filterDate(releaseValue, films);
   /* pidiendo que muestre solo las imagenes que corresponde al arreglo filtrado, 
  al contenedor donde se muestran todas las imagenes para esto-..
@@ -64,7 +47,7 @@ date.addEventListener("input", (e) => {
     postersContainer.innerHTML = `
     <div class= "noFoundMessage"> 
       <h2>Oops! =( try another one</h2>
-      <img class= "noFound-image" src="images\totoro.gif" alt="no-found">
+      <img class="noFound-image" src="./images/totoroNotFoundMsg.gif" alt="no-found" srcset=""/>
     </div>`;
   } else {
     postersContainer.innerHTML = filteredByDate
@@ -79,31 +62,6 @@ date.addEventListener("input", (e) => {
       .join("");
   }
 }); /* add event listener de date, cierra aquí */
-
-/* score function */
-score.addEventListener("input", (e) => {
-  let scoreValue = e.target.value;
-  scoreValues.innerHTML = scoreValue;
-  let filteredByScore = filterScore(scoreValue);
-  if (filteredByScore.length === 0) {
-    postersContainer.innerHTML = postersContainer.innerHTML = `
-    <div class= "noFoundMessage"> 
-      <h2>Oops! =( try another one</h2>
-      <img class= "noFound-image" src="/src/images/totoroNotFoundMsg.gif" alt="no-found" srcset="">
-    </div>`;
-  } else {
-    postersContainer.innerHTML = filteredByScore
-      .map(function (x) {
-        return `
-    <div class="poster">
-    <h2> ${x.title} </h2>
-    <h3> ${x.release_date} </h3>
-      <img class= "movie-image" src="${x.poster}" alt="poster" srcset="">
-    </div>`;
-      })
-      .join("");
-  }
-});
 
 directorsInput.addEventListener("input", (e) => {
   let directorsValue = e.target.value;
@@ -137,4 +95,48 @@ producersInput.addEventListener("input", (e) => {
     .join("");
 });
 
+/* score function */
+score.addEventListener("input", (e) => {
+  let scoreValue = e.target.value;
+  scoreValues.innerHTML = scoreValue;
+  let filteredByScore = filterScore(scoreValue);
+  if (filteredByScore.length === 0) {
+    postersContainer.innerHTML = postersContainer.innerHTML = `
+    <div class= "noFoundMessage"> 
+      <h2>Oops! =( try another one</h2>
+      <img
+      class="noFound-image"
+      src="./images/totoroNotFoundMsg.gif"
+      alt="no-found"
+      srcset=""
+    />
+    </div>`;
+  } else {
+    postersContainer.innerHTML = filteredByScore
+      .map(function (x) {
+        return `
+    <div class="poster">
+    <h2> ${x.title} </h2>
+    <h3> ${x.release_date} </h3>
+      <img class= "movie-image" src="${x.poster}" alt="poster" srcset="">
+    </div>`;
+      })
+      .join("");
+  }
+});
+inputOrder.addEventListener("input", (e) => {
+  let orderOptionValue = e.target.value;
+  let sortedByOrder = sortingFilms(films, orderOptionValue);
+  postersContainer.innerHTML = sortedByOrder
+    .map(function (x) {
+      return `
+    <div class="poster">
+    <h2> ${x.title} </h2>
+    <h3> ${x.release_date} </h3>
+      <img class= "movie-image" src="${x.poster}" alt="poster" srcset="">
+    </div>
+    `;
+    })
+    .join("");
+});
 postersContainer.innerHTML = posters.join("");
