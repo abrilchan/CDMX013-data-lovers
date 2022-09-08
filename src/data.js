@@ -20,12 +20,12 @@ donde la condicion es que regrese el objeto, si corresponde la fecha con el año
 es decir, se toma como referencia el valor que el usuario ha puesto en el input de fecha de estreno*/
 
 export function filterDate(year, films) {
-  const realiseArray = films.filter(function (film) {
+  const releaseArray = films.filter(function (film) {
     return film.release_date === year;
     /* checando si release_date es igual al input value, o sea el año, cuando coincida, se agregara al nuevo arreglo
     sino coincide, entonces no se agrega*/
   });
-  return realiseArray; /*retornando nuevo arreglo */
+  return releaseArray; /*retornando nuevo arreglo */
 }
 //console.log(filterDate("1986"));
 
