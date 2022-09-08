@@ -15,14 +15,14 @@ describe("filterDate", () => {
 
   it("Debería retornar Castle in the Sky para año de estreno 1986", () => {
     let mockData = [
-      { release_date: "ana" },
-      { release_date: "ana" },
-      { release_date: "abril" },
+      { release_date: "1986" },
+      { release_date: "2022" },
+      { release_date: "2020" },
       { release_date: "1986" },
     ];
-    let mockResult = [{ release_date: "ana" }, { release_date: "ana" }];
+    let mockResult = [{ release_date: "1986" }, { release_date: "1986" }];
 
-    expect(filterDate("ana", mockData)).toStrictEqual(mockResult);
+    expect(filterDate("1986", mockData)).toStrictEqual(mockResult);
   });
 });
 
